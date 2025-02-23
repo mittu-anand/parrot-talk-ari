@@ -37,17 +37,17 @@ def on_stasis_start(channel, event):
     else:  # IVR
         channel.answer()
         channel.play(media='sound:ivr-welcome')
-        channel.getDigits(numDigits=1, timeout=5000, callbackUrl='http://ari.parrottalk.co.uk/ivr-input')
+        channel.getDigits(numDigits=1, timeout=5000, callbackUrl='http://localhost/ivr-input')
 
 def on_dtmf_received(channel, event):
     digit = event['digit']
     if digit == '1':
         # Get more input (e.g., account number)
-        channel.getDigits(numDigits=5, timeout=5000, callbackUrl='http://ari.parrottalk.co.uk/ivr-account')
+        channel.getDigits(numDigits=5, timeout=5000, callbackUrl='http://localhost/ivr-account')
     elif digit == '2':
         # Transfer to another extension/peer
         channel.play(media='sound:ivr-transfer')
-        channel.getDigits(numDigits=3, timeout=5000, callbackUrl='http://ari.parrottalk.co.uk/ivr-extension')
+        channel.getDigits(numDigits=3, timeout=5000, callbackUrl='http://localhost/ivr-extension')
     else:
         channel.play(media='sound:invalid-input')
 
